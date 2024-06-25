@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /*
@@ -25,58 +22,136 @@ class Profile extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 10.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                height: 10.0,
-                color:Color ,
-                padding: const EdgeInsets.all(20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 100.0,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/profile1.jpg',
+                        fit: BoxFit.cover,
+                        width: 200.0,
+                        height: 200.0,
+                      ),
+                    ),
+                  ),
+                  const Divider(
+                    color: Colors.white54,
+                    height: 20.0,
+                  ),
+                  const Row(
+                    children: [
+                      Icon(
+                        Icons.person_2,
+                        color: Color.fromARGB(255, 255, 163, 26),
+                      ),
+                      SizedBox(
+                        width: 6.0,
+                      ),
+                      Text(
+                        'NAME',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 19.0,
+                            letterSpacing: 2.0),
+                      ),
+                    ],
+                  ),
+                  const Text(
+                    'Angelo Posadas',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 19.0,
+                        letterSpacing: 2.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  const Row(
+                    children: [
+                      Icon(
+                        Icons.school,
+                        color: Color.fromARGB(255, 255, 163, 26),
+                      ),
+                      SizedBox(
+                        width: 6.0,
+                      ),
+                      Text(
+                        'YEAR',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 19.0,
+                            letterSpacing: 2.0),
+                      ),
+                    ],
+                  ),
+                  const Text(
+                    '3rd Year',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 19.0,
+                        letterSpacing: 2.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  const Row(
+                    children: [
+                      Icon(
+                        Icons.email,
+                        color: Color.fromARGB(255, 255, 163, 26),
+                      ),
+                      SizedBox(
+                        width: 6.0,
+                      ),
+                      Text(
+                        'EMAIL',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 19.0,
+                            letterSpacing: 2.0),
+                      ),
+                    ],
+                  ),
+                  const Text(
+                    '21-16807@g.batstate-u-edu.ph',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 19.0,
+                        letterSpacing: 2.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              const Text(
-                'NAME',
-                style: TextStyle(
-                    color: Colors.white, fontSize: 19.0, letterSpacing: 2.0),
-              ),
-              const Text(
-                'Angelo Posadas',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 19.0,
-                    letterSpacing: 2.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              const Text(
-                'YEAR',
-                style: TextStyle(
-                    color: Colors.white, fontSize: 19.0, letterSpacing: 2.0),
-              ),
-              const Text(
-                '3rd Year',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 19.0,
-                    letterSpacing: 2.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              const Text(
-                'EMAIL',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 19.0,
-                    letterSpacing: 2.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              const Text(
-                '21-16807@g.batstate-u-edu.ph',
-                style: TextStyle(
-                    color: Colors.white, fontSize: 19.0, letterSpacing: 2.0),
-              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: const ButtonStyle(
+                            backgroundColor: WidgetStatePropertyAll(
+                                Color.fromARGB(255, 255, 163, 26))),
+                        child: const Text(
+                          "ADD YEAR",
+                          style: TextStyle(
+                            color: Colors.white,
+                            letterSpacing: 2,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              )
             ],
           ),
         ));
