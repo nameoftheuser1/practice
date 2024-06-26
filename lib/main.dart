@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:practice/pages/dashboard.dart';
 import 'package:practice/pages/home.dart';
+import 'package:practice/pages/menu.dart';
 import 'package:practice/pages/profile.dart';
 
-void main() => runApp(const MaterialApp(
+void main() => runApp( MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Profile(),
+      routes: {
+        '/' : (context) => Dashboard(),
+        '/menu': (context) => Menu(),
+        '/profile': (context) => Profile()
+
+      },
     ));
 
 class Sandbox extends StatelessWidget {
