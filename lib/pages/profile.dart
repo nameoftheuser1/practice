@@ -4,8 +4,16 @@ import 'package:flutter/material.dart';
 * This is for the Activity 1 making a user profile ui fo the user.
 * i would like to thank our i
 * */
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
+
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+
+  int year = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +62,8 @@ class Profile extends StatelessWidget {
                       Text(
                         'NAME',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 19.0,
+                            color: Colors.white38,
+                            fontSize: 14.0,
                             letterSpacing: 2.0),
                       ),
                     ],
@@ -83,15 +91,15 @@ class Profile extends StatelessWidget {
                       Text(
                         'YEAR',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 19.0,
+                            color: Colors.white38,
+                            fontSize: 14.0,
                             letterSpacing: 2.0),
                       ),
                     ],
                   ),
-                  const Text(
-                    '3rd Year',
-                    style: TextStyle(
+                   Text(
+                    '$year Year',
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 19.0,
                         letterSpacing: 2.0,
@@ -112,8 +120,8 @@ class Profile extends StatelessWidget {
                       Text(
                         'EMAIL',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 19.0,
+                            color: Colors.white38,
+                            fontSize: 14.0,
                             letterSpacing: 2.0),
                       ),
                     ],
@@ -135,7 +143,11 @@ class Profile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            year += 1;
+                          });
+                        },
                         style: const ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(
                                 Color.fromARGB(255, 255, 163, 26))),
