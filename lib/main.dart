@@ -4,16 +4,28 @@ import 'package:practice/pages/home.dart';
 import 'package:practice/pages/menu.dart';
 import 'package:practice/pages/profile.dart';
 
-void main() => runApp( MaterialApp(
+void main() => runApp(MaterialApp(
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+            backgroundColor: Color.fromARGB(255, 255, 163, 26),
+            centerTitle: true,
+            titleTextStyle: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 24)),
+        scaffoldBackgroundColor: const Color.fromARGB(90, 90, 90, 100),
+        cardTheme: const CardTheme(color: Color.fromARGB(90, 77, 76, 70)),
+      ),
       debugShowCheckedModeBanner: false,
+      initialRoute: '/menu',
       routes: {
-        '/' : (context) => Dashboard(),
+        '/': (context) => Dashboard(),
         '/menu': (context) => Menu(),
         '/profile': (context) => Profile()
-
       },
     ));
 
+//this is not used
 class Sandbox extends StatelessWidget {
   const Sandbox({super.key});
 
@@ -24,10 +36,7 @@ class Sandbox extends StatelessWidget {
         appBar: AppBar(
           title: const Text(
             'Flutter App',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          centerTitle: true,
-          backgroundColor: const Color.fromARGB(255, 255, 163, 26),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.end,

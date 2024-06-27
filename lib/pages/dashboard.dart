@@ -8,20 +8,16 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  String user = "Drug Lord";
+  String user = "Angelo";
   String benta = "5";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(90, 90, 90, 100),
       appBar: AppBar(
         title: const Text(
           'Welcome To Dashboard',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 255, 163, 26),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -37,7 +33,7 @@ class _DashboardState extends State<Dashboard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Hello $user! ang mga nasira mong buhay",
+                    "Hello $user! ",
                     style: const TextStyle(color: Colors.white),
                   ),
                   SizedBox(
