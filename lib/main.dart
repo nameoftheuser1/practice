@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:practice/pages/create_account.dart';
 import 'package:practice/pages/dashboard.dart';
 import 'package:practice/pages/home.dart';
+import 'package:practice/pages/login.dart';
 import 'package:practice/pages/menu.dart';
 import 'package:practice/pages/profile.dart';
 
@@ -17,11 +19,13 @@ void main() => runApp(MaterialApp(
         cardTheme: const CardTheme(color: Color.fromARGB(90, 77, 76, 70)),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/menu',
+      initialRoute: '/login',
       routes: {
         '/': (context) => Dashboard(),
         '/menu': (context) => Menu(),
-        '/profile': (context) => Profile()
+        '/profile': (context) => Profile(),
+        '/create' : (context) => CreateAccount(),
+        '/login' : (context) => Login(),
       },
     ));
 

@@ -12,7 +12,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   int year = 1;
 
   @override
@@ -97,7 +96,7 @@ class _ProfileState extends State<Profile> {
                       ),
                     ],
                   ),
-                   Text(
+                  Text(
                     '$year Year',
                     style: const TextStyle(
                         color: Colors.white,
@@ -149,6 +148,8 @@ class _ProfileState extends State<Profile> {
                           });
                         },
                         style: const ButtonStyle(
+                          elevation: WidgetStatePropertyAll(0.5),
+                          padding: WidgetStatePropertyAll(EdgeInsets.all(5.0)),
                             backgroundColor: WidgetStatePropertyAll(
                                 Color.fromARGB(255, 255, 163, 26))),
                         child: const Text(
