@@ -19,7 +19,7 @@ class Menucard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  product.productName,
+                  product.product_name,
                   style: const TextStyle(
                       color: Colors.white70,
                       fontWeight: FontWeight.bold,
