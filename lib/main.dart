@@ -19,13 +19,13 @@ void main() => runApp(MaterialApp(
         cardTheme: const CardTheme(color: Color.fromARGB(90, 77, 76, 70)),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/menu',
+      initialRoute: '/login',
       routes: {
-        '/': (context) => Dashboard(),
-        '/menu': (context) => Menu(),
-        '/profile': (context) => Profile(),
-        '/create' : (context) => CreateAccount(),
-        '/login' : (context) => Login(),
+        '/': (context) => const Dashboard(),
+        '/menu': (context) => const Menu(),
+        '/profile': (context) => const Profile(),
+        '/create' : (context) => const CreateAccount(),
+        '/login' : (context) => const Login(),
       },
     ));
 

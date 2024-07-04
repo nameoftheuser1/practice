@@ -16,6 +16,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // backgroundColor: Colors.white,
       body: SafeArea(
           child: Padding(
@@ -89,6 +90,7 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/');
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
                       }

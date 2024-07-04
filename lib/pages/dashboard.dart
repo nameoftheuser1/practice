@@ -43,12 +43,13 @@ class _DashboardState extends State<Dashboard> {
                       child: Center(
                         child: Text(
                           "$benta",
-                          style: const TextStyle(fontWeight: FontWeight.w900,
-                          fontSize:40),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontSize: 40,
+                              color: Colors.white70),
                         ),
                       ),
                     ),
-
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -64,7 +65,9 @@ class _DashboardState extends State<Dashboard> {
                             "Go To Menu",
                             style: TextStyle(color: Colors.white),
                           )),
-                      const SizedBox(width: 10,),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       ElevatedButton(
                           style: const ButtonStyle(
                               backgroundColor:
@@ -75,10 +78,12 @@ class _DashboardState extends State<Dashboard> {
                           child: const Text(
                             "Go To Profile",
                             style: TextStyle(color: Colors.white),
-                          ))
+                          )),
                     ],
                   ),
+
                 ],
+
               ),
             ),
           ),

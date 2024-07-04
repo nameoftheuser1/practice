@@ -151,9 +151,16 @@ class _CreateAccountState extends State<CreateAccount> {
                       backgroundColor: Colors.black38,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
-                    child: const Text(
-                      'GitHub',
-                      style: TextStyle(color: Colors.white),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.catching_pokemon, color: Colors.white70,),
+                        SizedBox(width: 10,),
+                        Text(
+                          'Login with GitHub',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -163,9 +170,16 @@ class _CreateAccountState extends State<CreateAccount> {
                       backgroundColor: const Color.fromARGB(200, 224, 54, 88),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
-                    child: const Text(
-                      'Google',
-                      style: TextStyle(color: Colors.white),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.alternate_email, color: Colors.white70,),
+                        SizedBox(width: 10,),
+                        Text(
+                          'Login with Google',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 10.0,),
