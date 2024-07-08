@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'Package:flutter/material.dart';
+import 'package:practice/pages/selected_product.dart';
 import 'package:practice/services/product.dart';
 import 'package:practice/services/menuCard.dart';
 import 'package:http/http.dart' as http;
@@ -55,12 +56,12 @@ class _MenuState extends State<Menu> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: FutureBuilder(
             future: products,
             builder: (context, snapshots) {
               if (snapshots.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: SpinKitSpinningLines(
                     color: Colors.amber,
                     size: 100.0,
@@ -70,12 +71,20 @@ class _MenuState extends State<Menu> {
               if (snapshots.hasData) {
                 List products = snapshots.data!;
                 return Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: ListView.builder(
                       itemCount: products.length,
                       itemBuilder: (context, index) {
                         return Card(
                           child: ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>  SelectedProduct(
+                                        product: products[index]),
+                                  ));
+                            },
                             title: Column(
                               children: [
                                 Row(
@@ -83,26 +92,29 @@ class _MenuState extends State<Menu> {
                                   children: [
                                     Text(
                                       products[index].product_name,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.white, fontSize: 20),
                                     ),
-                                    SizedBox(width: 10,),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
                                     Text(
                                       '(₱${products[index].price})',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.white24),
                                     ),
                                   ],
                                 ),
                                 Text(
                                   products[index].generic_name,
-                                  style: TextStyle(
-                                      color: Colors.white70, ),
+                                  style: const TextStyle(
+                                    color: Colors.white70,
+                                  ),
                                 ),
                                 Text(
                                   products[index].product_description,
-                                  style: TextStyle(
-                                    color: Colors.white70, fontSize: 14),
+                                  style: const TextStyle(
+                                      color: Colors.white70, fontSize: 14),
                                 ),
                               ],
                             ),
@@ -111,7 +123,7 @@ class _MenuState extends State<Menu> {
                       }),
                 );
               }
-              return Center(
+              return const Center(
                 child: Text(
                   " Unable to load data",
                   style: TextStyle(color: Colors.white),

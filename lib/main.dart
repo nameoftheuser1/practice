@@ -5,6 +5,7 @@ import 'package:practice/pages/home.dart';
 import 'package:practice/pages/login.dart';
 import 'package:practice/pages/menu.dart';
 import 'package:practice/pages/profile.dart';
+import 'package:practice/pages/selected_product.dart';
 
 void main() => runApp(MaterialApp(
       theme: ThemeData(
@@ -19,7 +20,7 @@ void main() => runApp(MaterialApp(
         cardTheme: const CardTheme(color: Color.fromARGB(90, 77, 76, 70)),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
+      initialRoute: '/',
       routes: {
         '/': (context) => const Dashboard(),
         '/menu': (context) => const Menu(),
