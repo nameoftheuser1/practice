@@ -20,7 +20,7 @@ void main() => runApp(MaterialApp(
         cardTheme: const CardTheme(color: Color.fromARGB(90, 77, 76, 70)),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
         '/': (context) => const Dashboard(),
         '/menu': (context) => const Menu(),
@@ -33,6 +33,7 @@ void main() => runApp(MaterialApp(
 //this is not used
 class Sandbox extends StatelessWidget {
   const Sandbox({super.key});
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:practice/services/user.dart';
+import 'package:http/http.dart' as http;
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
@@ -10,13 +14,29 @@ class CreateAccount extends StatefulWidget {
 class _CreateAccountState extends State<CreateAccount> {
   final formKey = GlobalKey<FormState>();
 
-  String name = '';
+  String username = '';
   String email = '';
   String password = '';
+  bool _obscure = true;
+  IconData _obscureIcon = Icons.visibility_off;
+
+  createAccount(User user) async {
+    final response = await http.post(
+        Uri.parse('http://10.0.2.2:8080/api/v1/auth/register/user'),
+        headers: <String, String>{
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'username': user.username,
+          'email': user.email,
+          'password': user.password
+        }));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // backgroundColor: Colors.white,
       body: SafeArea(
           child: Padding(
@@ -60,7 +80,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       return null;
                     },
                     onSaved: (value) {
-                      name = value!;
+                      username = value!;
                     },
                   ),
                   const SizedBox(height: 5),
@@ -87,8 +107,25 @@ class _CreateAccountState extends State<CreateAccount> {
                   const SizedBox(height: 20),
                   TextFormField(
                     style: const TextStyle(color: Colors.white),
-                    obscureText: true,
+                    enableInteractiveSelection: false,
+                    obscureText: _obscure,
                     decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscureIcon,
+                            color: Colors.white70,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscure = !_obscure;
+                              if(_obscure){
+                                _obscureIcon = Icons.visibility_off;
+                              }else{
+                                _obscureIcon = Icons.visibility;
+                              }
+                            });
+                          },
+                        ),
                         label: const Text(
                           'Password',
                           style: TextStyle(color: Colors.white),
@@ -116,6 +153,12 @@ class _CreateAccountState extends State<CreateAccount> {
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
+                        User user = User(
+                            username: username,
+                            email: email,
+                            password: password);
+                        createAccount(user);
+                        Navigator.pushNamed(context, '/login');
                       }
                     },
                     style: const ButtonStyle(
@@ -128,20 +171,33 @@ class _CreateAccountState extends State<CreateAccount> {
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   const Row(
-                    children:<Widget> [
-                       Expanded(child: Divider(
-                         color:Colors.white70,
-                         height: 50,
-                       ),),
-                      SizedBox(width: 5.0,),
-                      Text("or",style: TextStyle(color: Colors.white70),),
-                      SizedBox(width: 5.0,),
-                      Expanded(child: Divider(
-                        color:Colors.white70,
-                        height: 50,
-                      ),)
+                    children: <Widget>[
+                      Expanded(
+                        child: Divider(
+                          color: Colors.white70,
+                          height: 50,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Text(
+                        "or",
+                        style: TextStyle(color: Colors.white70),
+                      ),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Expanded(
+                        child: Divider(
+                          color: Colors.white70,
+                          height: 50,
+                        ),
+                      )
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -154,8 +210,13 @@ class _CreateAccountState extends State<CreateAccount> {
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.catching_pokemon, color: Colors.white70,),
-                        SizedBox(width: 10,),
+                        Icon(
+                          Icons.catching_pokemon,
+                          color: Colors.white70,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
                         Text(
                           'Login with GitHub',
                           style: TextStyle(color: Colors.white),
@@ -173,8 +234,13 @@ class _CreateAccountState extends State<CreateAccount> {
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.alternate_email, color: Colors.white70,),
-                        SizedBox(width: 10,),
+                        Icon(
+                          Icons.alternate_email,
+                          color: Colors.white70,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
                         Text(
                           'Login with Google',
                           style: TextStyle(color: Colors.white),
@@ -182,13 +248,24 @@ class _CreateAccountState extends State<CreateAccount> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10.0,),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Already have account? ", style: TextStyle(color: Colors.white70),),
+                      const Text(
+                        "Already have account? ",
+                        style: TextStyle(color: Colors.white70),
+                      ),
                       InkWell(
-                        child: const Text("Login here", style: TextStyle(color: Colors.blue, decoration: TextDecoration.underline,decorationColor: Colors.blue), ),
+                        child: const Text(
+                          "Login here",
+                          style: TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                              decorationColor: Colors.blue),
+                        ),
                         onTap: () => Navigator.pushNamed(context, '/login'),
                       )
                     ],
