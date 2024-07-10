@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:practice/services/user.dart';
+import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -10,8 +14,33 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final formKey = GlobalKey<FormState>();
 
-  String email = '';
-  String password = '';
+  String _email = '';
+  String _password = '';
+
+  Widget buttonContent = Text(
+    'Login',
+    style: TextStyle(color: Colors.white),
+  );
+
+  Widget loadingDisplay = CircularProgressIndicator();
+
+  login(User user) async {
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:8080/api/v1/auth/login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: jsonEncode(<String, dynamic>{
+        'usernameOrEmail': user.email,
+        'password': user.password
+      }),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+    // print(response.body);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +86,7 @@ class _LoginState extends State<Login> {
                       return null;
                     },
                     onSaved: (value) {
-                      email = value!;
+                      _email = value!;
                     },
                   ),
                   const SizedBox(height: 20),
@@ -84,7 +113,7 @@ class _LoginState extends State<Login> {
                       return null;
                     },
                     onSaved: (value) {
-                      password = value!;
+                      _password = value!;
                     },
                   ),
                   const SizedBox(height: 20),
@@ -94,31 +123,58 @@ class _LoginState extends State<Login> {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
                       }
+                      User user = User(
+                          username: '', email: _email, password: _password);
+                      /*if(login(user)){
+                        Navigator.pushNamed(context, '/');
+                      }*/
+                      setState(() {
+                        buttonContent = FutureBuilder(
+                            future: login(user),
+                            builder: (context, snapshots) {
+                              if (snapshots.connectionState ==
+                                  ConnectionState.waiting) {
+                                return loadingDisplay;
+                              }
+                              if (snapshots.hasData) {}
+                              return Text("loginedn");
+                            });
+                      });
                     },
                     style: const ButtonStyle(
                         elevation: WidgetStatePropertyAll(0.5),
                         padding: WidgetStatePropertyAll(EdgeInsets.all(5.0)),
                         backgroundColor: WidgetStatePropertyAll(
                             Color.fromARGB(255, 255, 163, 26))),
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                    child: buttonContent,
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   const Row(
-                    children:<Widget> [
-                      Expanded(child: Divider(
-                        color:Colors.white70,
-                        height: 50,
-                      ),),
-                      SizedBox(width: 5.0,),
-                      Text("or login with",style: TextStyle(color: Colors.white70),),
-                      SizedBox(width: 5.0,),
-                      Expanded(child: Divider(
-                        color:Colors.white70,
-                        height: 50,
-                      ),)
+                    children: <Widget>[
+                      Expanded(
+                        child: Divider(
+                          color: Colors.white70,
+                          height: 50,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Text(
+                        "or login with",
+                        style: TextStyle(color: Colors.white70),
+                      ),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Expanded(
+                        child: Divider(
+                          color: Colors.white70,
+                          height: 50,
+                        ),
+                      )
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -131,8 +187,13 @@ class _LoginState extends State<Login> {
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.catching_pokemon, color: Colors.white70,),
-                        SizedBox(width: 10,),
+                        Icon(
+                          Icons.catching_pokemon,
+                          color: Colors.white70,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
                         Text(
                           'Login with GitHub',
                           style: TextStyle(color: Colors.white),
@@ -150,8 +211,13 @@ class _LoginState extends State<Login> {
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.alternate_email, color: Colors.white70,),
-                        SizedBox(width: 10,),
+                        Icon(
+                          Icons.alternate_email,
+                          color: Colors.white70,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
                         Text(
                           'Login with Google',
                           style: TextStyle(color: Colors.white),
@@ -159,7 +225,9 @@ class _LoginState extends State<Login> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 15,),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -173,7 +241,7 @@ class _LoginState extends State<Login> {
                           style: TextStyle(
                               color: Colors.blue,
                               decoration: TextDecoration.underline,
-                          decorationColor: Colors.blue),
+                              decorationColor: Colors.blue),
                         ),
                         onTap: () => Navigator.pushNamed(context, '/create'),
                       )
@@ -186,6 +254,5 @@ class _LoginState extends State<Login> {
         ),
       )),
     );
-    ;
   }
 }
