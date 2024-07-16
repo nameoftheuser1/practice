@@ -119,7 +119,6 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/');
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
                       }
@@ -129,17 +128,20 @@ class _LoginState extends State<Login> {
                         Navigator.pushNamed(context, '/');
                       }*/
                       setState(() {
-                        buttonContent = FutureBuilder(
+                          FutureBuilder(
                             future: login(user),
                             builder: (context, snapshots) {
                               if (snapshots.connectionState ==
                                   ConnectionState.waiting) {
                                 return loadingDisplay;
                               }
-                              if (snapshots.hasData) {}
+                              if (snapshots.hasData) {
+                              }
                               return Text("loginedn");
                             });
                       });
+                      Navigator.pushNamed(context, '/');
+
                     },
                     style: const ButtonStyle(
                         elevation: WidgetStatePropertyAll(0.5),

@@ -18,7 +18,8 @@ class _MenuState extends State<Menu> {
   late Future<List<dynamic>> products;
 
   Future<List<dynamic>> fetchData() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8080/api/v1/product/all'));
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2:8080/api/v1/product/all'));
 
     final data = jsonDecode(response.body);
     // print(data);
@@ -27,6 +28,7 @@ class _MenuState extends State<Menu> {
     for (var product in data) {
       products.add(Product.fromJson(product));
     }
+    // print(products);
     return products;
   }
 
@@ -81,12 +83,27 @@ class _MenuState extends State<Menu> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>  SelectedProduct(
+                                    builder: (context) => SelectedProduct(
                                         product: products[index]),
                                   ));
                             },
                             title: Column(
                               children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white70, width: 2.0),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: Image.asset(
+                                      products[index].url,
+                                      height: 100.0,
+                                      width: 700,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
